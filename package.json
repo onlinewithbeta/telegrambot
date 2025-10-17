@@ -8,6 +8,6 @@
   "main": "index.js",
   "scripts": {
     "test": "node index",
-    "start": "node index"
+    "start": "npm install && node index"
   }
 }
