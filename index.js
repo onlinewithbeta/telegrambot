@@ -1,11 +1,13 @@
 import express from 'express'
+import dotenv from 'dotenv'
+dotenv.config();
 
-const PORT = 2023;
 const app = new express();
+const PORT = process.env.PORT || 2023;
 
 app.get("/",  (req,res)=>{
   console.log('entering');
-   res.send("welcome");
+   res.send("v2");
   console.log('going');
 })
 
