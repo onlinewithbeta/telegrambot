@@ -19,15 +19,15 @@ export async function connect () {
 export function axsInst() {
   return {
     get(method, params) {
-      return axios(`/${method}`, {
-        baseURL: cfg.BASE_URL,
+      return axios.get(`/${method}`, {
+        baseURL: `${cfg.BASE_URL}/bot${cfg.TOKEN}`,
         params,
       });
     },
     post(method, data) {
       return axios({
         method: 'POST',
-        baseURL: cfg.BASE_URL,
+        baseURL: `${cfg.BASE_URL}/bot${cfg.TOKEN}`,
         url: `/${method}`,
         data,
       });
