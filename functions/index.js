@@ -15,25 +15,8 @@ export async function connect () {
   }catch(err) {
     console.log(err)}
 }
+async function sendTelegramMessage(botToken, chatId, text) {}
 
-export function axsInst() {
-  return {
-    get(method, params) {
-      return axios.get(`/${method}`, {
-        baseURL: `${cfg.BASE_URL}/bot${cfg.TOKEN}`,
-        params,
-      });
-    },
-    post(method, data) {
-      return axios({
-        method: 'POST',
-        baseURL: `${cfg.BASE_URL}/bot${cfg.TOKEN}`,
-        url: `/${method}`,
-        data,
-      });
-    },
-  };
-}
 
 
 export async function sendMessage(body) {
@@ -41,16 +24,19 @@ export async function sendMessage(body) {
     let msgObj = body.message;
     let msgId = msgObj.chat.id;
     let msg = msgObj.text;
-    
-    // Add await here
-    const api = await axsInst();
-    await api.get("sendmessage", {
-      chat: msgId,
-      text: `${msg} Replied ++`
+
+    const response = await fetch(`${cfg.BASE_URL}/bot${cfg.TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: msgId, text: `${msg} is replied`, parse_mode: 'HTML'
+      })
     });
-    
+    return await response.json();
+
   } catch(err) {
     console.log(err);
   }
 }
-
