@@ -16,39 +16,41 @@ export async function connect () {
     console.log(err)}
 }
 
-export async function axsInst(){
-  return{
-    get(method,params){
-      return axios.get(`/${method}`,{
-        baseUrl : cfg.BASE_URL,
+export function axsInst() {
+  return {
+    get(method, params) {
+      return axios.get(`/${method}`, {
+        baseURL: cfg.BASE_URL,
         params,
       });
     },
-    post(method,data){
+    post(method, data) {
       return axios({
-        method:'POST',
-        baseUrl:cfg.BASE_URL,
-        url:`/${method}`,
+        method: 'POST',
+        baseURL: cfg.BASE_URL,
+        url: `/${method}`,
         data,
       });
     },
-  }
+  };
 }
 
 
 export async function sendMessage(body) {
-  try{
+  try {
     let msgObj = body.message;
     let msgId = msgObj.chat.id;
     let msg = msgObj.text;
     
-    await axsInst.get("sendmessage",{
-      chat:msgId,
-      text :`${msg} Replied ++`
-    })
+    // Add await here
+    const api = await axsInst();
+    await api.get("sendmessage", {
+      chat: msgId,
+      text: `${msg} Replied ++`
+    });
     
-  }catch(err){
-    console.log(err)
+  } catch(err) {
+    console.log(err);
   }
-    
 }
+
