@@ -3,7 +3,7 @@ import {
   cfg
 } from '../config.js';
 
-const MY_URL = `${cfg.BASE_URL}${cfg.TOKEN}/setWebhook?url=${cfg.URL}`;
+const MY_URL = `${cfg.BASE_URL}/bot${cfg.TOKEN}/setWebhook?url=${cfg.URL}`;
 
 export async function connect () {
   try {
@@ -19,7 +19,7 @@ export async function connect () {
 export function axsInst() {
   return {
     get(method, params) {
-      return axios.get(`/${method}`, {
+      return axios(`/${method}`, {
         baseURL: cfg.BASE_URL,
         params,
       });
