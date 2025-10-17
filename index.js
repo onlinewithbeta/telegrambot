@@ -1,17 +1,31 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import {
+  connect
+} from './functions/index.js'
 dotenv.config();
 
 const app = new express();
+app.use(express.json());
+
 const PORT = process.env.PORT || 2023;
 
-app.get("/",  (req,res)=>{
-  console.log('entering');
-   res.send("v2");
-  console.log('going');
+let chat = [{
+  text: 'nothing'
+}];
+
+app.get("/", (req, res)=> {
+  res.send(chat)
+  console.log('Chat read');
 })
 
-app.listen( PORT , ()=>{
-  console.log(`http://localhost:${PORT}`);
+app.post("/", (req, res)=> {
+  chat.push(req.body);
+  console.log('Chat added');
+  res.send(chat)
 })
-   
+
+app.listen(PORT, async ()=> {
+  console.log(`http://localhost:${PORT}`);
+  await connect();
+})
