@@ -6,4 +6,4 @@ export const cfg = {
   URL:process.env.URL,
   BASE_URL:process.env.BASE_URL,
 };
-console.log(cfg,dotenv.config(),process.env)
+console.log(cfg)
