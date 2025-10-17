@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import {
-  connect,sendMessage
+  connect,sendMessage,axsInst
 } from './functions/index.js'
 dotenv.config();
 
