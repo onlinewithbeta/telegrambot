@@ -7,9 +7,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node index"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
+    "test": "node index",
+    "start": "node index"
   }
 }
