@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import {
-  connect
+  connect,sendMessage
 } from './functions/index.js'
 dotenv.config();
 
@@ -19,8 +19,9 @@ app.get("/", (req, res)=> {
   console.log('Chat read');
 })
 
-app.post("/", (req, res)=> {
+app.post("/", async (req, res)=> {
   chat.push(req.body);
+  await sendMessage(req.body)
   console.log('Chat added');
   res.send(chat)
 })

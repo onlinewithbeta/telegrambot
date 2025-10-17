@@ -15,3 +15,40 @@ export async function connect () {
   }catch(err) {
     console.log(err)}
 }
+
+function axsInst(){
+  return{
+    get(method,params){
+      return axios.get(`/${method}`,{
+        baseUrl : cfg.BASE_URL,
+        params,
+      });
+    },
+    post(method,data){
+      return axios({
+        method:'POST',
+        baseUrl:cfg.BASE_URL,
+        url:`/${method}`,
+        data,
+      });
+    },
+  }
+}
+
+
+export async function sendMessage(body) {
+  try{
+    let msgObj = body.message;
+    let msgId = msgObj.chat.id;
+    let msg = msgObj.text;
+    
+    await axsInst.get("sendmessage",{
+      chat:msgId,
+      text :`${msg} Replied ++`
+    })
+    
+  }catch(err){
+    console.log(err)
+  }
+    
+}
